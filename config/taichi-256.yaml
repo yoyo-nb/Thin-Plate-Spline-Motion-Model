@@ -1,0 +1,128 @@
+# Dataset parameters
+# Each dataset should contain 2 folders train and test
+# Each video can be represented as:
+#   - an image of concatenated frames
+#   - '.mp4' or '.gif'
+#   - folder with all frames from a specific video
+# In case of Taichi. Same (youtube) video can be splitted in many parts (chunks). Each part has a following
+# format (id)#other#info.mp4. For example '12335#adsbf.mp4' has an id 12335. In case of TaiChi id stands for youtube
+# video id.
+dataset_params:
+  # Path to data, data can be stored in several formats: .mp4 or .gif videos, stacked .png images or folders with frames.
+  root_dir: ../taichi
+  # Image shape, needed for staked .png format.
+  frame_shape: null
+  # In case of TaiChi single video can be splitted in many chunks, or the maybe several videos for single person.
+  # In this case epoch can be a pass over different videos (if id_sampling=True) or over different chunks (if id_sampling=False)
+  # If the name of the video '12335#adsbf.mp4' the id is assumed to be 12335
+  id_sampling: True
+  # Augmentation parameters see augmentation.py for all posible augmentations
+  augmentation_params:
+    flip_param:
+      horizontal_flip: True
+      time_flip: True
+    jitter_param:
+      brightness: 0.1
+      contrast: 0.1
+      saturation: 0.1
+      hue: 0.1
+
+# Defines model architecture
+model_params:
+  common_params:
+    # Number of TPS transformation
+    num_tps: 10
+    # Number of channels per image
+    num_channels: 3
+    # Whether to estimate affine background transformation
+    bg: True
+    # Whether to estimate the multi-resolution occlusion masks
+    multi_mask: True
+  generator_params:
+    # Number of features mutliplier
+    block_expansion: 64
+    # Maximum allowed number of features
+    max_features: 512
+    # Number of downsampling blocks and Upsampling blocks.
+    num_down_blocks: 3
+  dense_motion_params:
+    # Number of features mutliplier
+    block_expansion: 64
+    # Maximum allowed number of features
+    max_features: 1024
+    # Number of block in Unet. 
+    num_blocks: 5
+    # Optical flow is predicted on smaller images for better performance,
+    # scale_factor=0.25 means that 256x256 image will be resized to 64x64  
+    scale_factor: 0.25
+  avd_network_params:
+    # Bottleneck for identity branch
+    id_bottle_size: 64
+    # Bottleneck for pose branch
+    pose_bottle_size: 64
+
+# Parameters of training
+train_params:
+  # Number of training epochs 
+  num_epochs: 100
+  # For better i/o performance when number of videos is small number of epochs can be multiplied by this number.
+  # Thus effectivlly with num_repeats=100 each epoch is 100 times larger. 
+  num_repeats: 150
+  # Drop learning rate by 10 times after this epochs 
+  epoch_milestones: [70, 90]
+  # Initial learing rate for all modules
+  lr_generator: 2.0e-4
+  batch_size: 28
+  # Scales for perceptual pyramide loss. If scales = [1, 0.5, 0.25, 0.125] and image resolution is 256x256,
+  # than the loss will be computer on resolutions 256x256, 128x128, 64x64, 32x32.
+  scales: [1, 0.5, 0.25, 0.125]
+  # Parameters of dropout
+  # The first dropout_epoch training uses dropout operation 
+  dropout_epoch: 35
+  # The probability P will linearly increase from dropout_startp to dropout_maxp in dropout_inc_epoch epochs
+  dropout_maxp: 0.7
+  dropout_startp: 0.0
+  dropout_inc_epoch: 10
+  # Estimate affine background transformation from the bg_start epoch.
+  bg_start: 0
+  # Parameters of random TPS transformation for equivariance loss
+  transform_params:
+    # Sigma for affine part
+    sigma_affine: 0.05
+    # Sigma for deformation part
+    sigma_tps: 0.005
+    # Number of point in the deformation grid
+    points_tps: 5
+  loss_weights:
+    # Weights for perceptual loss.
+    perceptual: [10, 10, 10, 10, 10]
+    # Weights for value equivariance.
+    equivariance_value: 10
+    # Weights for warp loss.
+    warp_loss: 10
+    # Weights for bg loss.
+    bg: 10
+
+# Parameters of training (animation-via-disentanglement)
+train_avd_params:
+  # Number of training epochs, visualization is produced after each epoch.
+  num_epochs: 60
+  # For better i/o performance when number of videos is small number of epochs can be multiplied by this number.
+  # Thus effectively with num_repeats=100 each epoch is 100 times larger.
+  num_repeats: 150
+  # Batch size.
+  batch_size: 256
+  # Dataset preprocessing cpu workers
+  dataloader_workers: 24
+  # Drop learning rate 10 times after this epochs
+  epoch_milestones: [40, 50]
+  # Initial learning rate
+  lr: 1.0e-3
+  # Weights for equivariance loss.
+  lambda_shift: 1
+  random_scale: 0.25
+
+visualizer_params:
+  kp_size: 5
+  draw_border: True
+  colormap: 'gist_rainbow'

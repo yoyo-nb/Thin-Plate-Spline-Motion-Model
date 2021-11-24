@@ -1,0 +1,71 @@
+dataset_params:
+  root_dir: ../vox
+  frame_shape: null
+  id_sampling: True
+  augmentation_params:
+    flip_param:
+      horizontal_flip: True
+      time_flip: True
+    jitter_param:
+      brightness: 0.1
+      contrast: 0.1
+      saturation: 0.1
+      hue: 0.1
+
+
+model_params:
+  common_params:
+    num_tps: 10
+    num_channels: 3
+    bg: True
+    multi_mask: True
+  generator_params:
+    block_expansion: 64
+    max_features: 512
+    num_down_blocks: 3
+  dense_motion_params:
+    block_expansion: 64
+    max_features: 1024
+    num_blocks: 5
+    scale_factor: 0.25
+  avd_network_params:
+    id_bottle_size: 64
+    pose_bottle_size: 64
+
+
+train_params:
+  num_epochs: 100
+  num_repeats: 75
+  epoch_milestones: [70, 90]
+  lr_generator: 2.0e-4
+  batch_size: 28
+  scales: [1, 0.5, 0.25, 0.125]
+  dropout_epoch: 35
+  dropout_maxp: 0.3
+  dropout_startp: 0.1
+  dropout_inc_epoch: 10
+  bg_start: 10
+  transform_params:
+    sigma_affine: 0.05
+    sigma_tps: 0.005
+    points_tps: 5
+  loss_weights:
+    perceptual: [10, 10, 10, 10, 10]
+    equivariance_value: 10
+    warp_loss: 10
+    bg: 10
+
+train_avd_params:
+  num_epochs: 1
+  num_repeats: 1
+  batch_size: 256
+  dataloader_workers: 24
+  epoch_milestones: [40, 50]
+  lr: 1.0e-3
+  lambda_shift: 1
+  random_scale: 0.25
+
+visualizer_params:
+  kp_size: 5
+  draw_border: True
+  colormap: 'gist_rainbow'
