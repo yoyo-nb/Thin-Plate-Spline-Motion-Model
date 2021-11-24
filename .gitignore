@@ -1,0 +1,7 @@
+log/*
+*.pth.tar
+*.mp4
+*.png
+*.jpg
+*.pth
+*.pyc
