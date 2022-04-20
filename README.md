@@ -1,10 +1,11 @@
-# Thin-Plate Spline Motion Model for Image Animation
+# [CVPR2022] Thin-Plate Spline Motion Model for Image Animation
 
-Part of the source code of the paper "Thin-Plate Spline Motion Model for Image Animation". The full source code and pre-trained models will be publicly available.
+Source code of the CVPR'2022 paper "[Thin-Plate Spline Motion Model for Image Animation](https://arxiv.org/abs/2203.14367)".
 
 ### Installation
 
-We support ```python3```. To install the dependencies run:
+We support ```python3```.(Recommended version is Python 3.9).
+To install the dependencies run:
 ```bash
 pip install -r requirements.txt
 ```
@@ -20,7 +21,7 @@ See description of the parameters in the ```config/taichi-256.yaml```.
 
 1) **MGif**. Follow [Monkey-Net](https://github.com/AliaksandrSiarohin/monkey-net).
 
-2) **TaiChiHD** and **VoxCeleb**. Follow instructions from https://github.com/AliaksandrSiarohin/video-preprocessing. 
+2) **TaiChiHD** and **VoxCeleb**. Follow instructions from [video-preprocessing](https://github.com/AliaksandrSiarohin/video-preprocessing). 
 
 3) **TED-talks**. Follow instructions from [MRAA](https://github.com/snap-research/articulated-animation).
 
@@ -55,8 +56,19 @@ To compute metrics, follow instructions from https://github.com/AliaksandrSiaroh
 
 
 ### Pre-trained models
-Coming soon
+Coming Soon Coming Soon Coming Soon Coming Soon Coming Soon!!!!
+I promise!.
 
 ### Image animation demo
-Coming soon
+(when the pre-trained models released)
 
+- notebook: `demo.ipynb`, edit the config cell and run for image animation.
+- python:
+```bash
+CUDA_VISIBLE_DEVICES=0 python demo.py --config config/vox-256.yaml --checkpoint checkpoints/vox.pth.tar --source_image ./source.jpg --driving_video ./driving.mp4
+```
+
+# Acknowledgments
+The main code is based upon [FOMM](https://github.com/AliaksandrSiarohin/first-order-model) and [MRAA](https://github.com/snap-research/articulated-animation)
+
+Thanks for the excellent works!

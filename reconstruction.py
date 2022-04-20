@@ -66,7 +66,4 @@ def reconstruction(config, inpainting_network, kp_detector, bg_predictor, dense_
             predictions = np.concatenate(predictions, axis=1)
             imageio.imsave(os.path.join(png_dir, x['name'][0] + '.png'), (255 * predictions).astype(np.uint8))
 
-            image_name = x['name'][0] + '.mp4'
-            imageio.mimsave(os.path.join(log_dir, image_name), visualizations)
-
     print("Reconstruction loss: %s" % np.mean(loss_list))

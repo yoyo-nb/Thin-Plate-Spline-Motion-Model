@@ -5,3 +5,5 @@ log/*
 *.jpg
 *.pth
 *.pyc
+*.jpeg
+checkpoints/*

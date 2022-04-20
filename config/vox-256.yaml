@@ -56,11 +56,11 @@ train_params:
     bg: 10
 
 train_avd_params:
-  num_epochs: 1
-  num_repeats: 1
+  num_epochs: 100
+  num_repeats: 75
   batch_size: 256
   dataloader_workers: 24
-  epoch_milestones: [40, 50]
+  epoch_milestones: [70, 90]
   lr: 1.0e-3
   lambda_shift: 1
   random_scale: 0.25

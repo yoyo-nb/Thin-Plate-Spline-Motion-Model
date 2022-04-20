@@ -8,7 +8,7 @@ from torch.nn.utils import clip_grad_norm_
 from frames_dataset import DatasetRepeater
 import math
 
-def train(config, inpainting_network, kp_detector, bg_predictor, dense_motion_network, checkpoint, log_dir, dataset, device_ids):
+def train(config, inpainting_network, kp_detector, bg_predictor, dense_motion_network, checkpoint, log_dir, dataset):
     train_params = config['train_params']
     optimizer = torch.optim.Adam(
         [{'params': list(inpainting_network.parameters()) +
@@ -47,7 +47,7 @@ def train(config, inpainting_network, kp_detector, bg_predictor, dense_motion_ne
         generator_full = torch.nn.DataParallel(generator_full).cuda()  
         
     bg_start = train_params['bg_start']
-
+    
     with Logger(log_dir=log_dir, visualizer_params=config['visualizer_params']) as logger:
         for epoch in trange(start_epoch, train_params['num_epochs']):
             for x in dataloader:
