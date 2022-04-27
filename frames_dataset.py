@@ -6,11 +6,8 @@ from imageio import mimread
 from skimage.transform import resize
 import numpy as np
 from torch.utils.data import Dataset
-import pandas as pd
 from augmentation import AllAugmentationTransform
 import glob
-import cv2
-import random
 from functools import partial
 
 

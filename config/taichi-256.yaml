@@ -57,9 +57,9 @@ model_params:
     scale_factor: 0.25
   avd_network_params:
     # Bottleneck for identity branch
-    id_bottle_size: 64
+    id_bottle_size: 128
     # Bottleneck for pose branch
-    pose_bottle_size: 64
+    pose_bottle_size: 128
 
 # Parameters of training
 train_params:
@@ -76,6 +76,10 @@ train_params:
   # Scales for perceptual pyramide loss. If scales = [1, 0.5, 0.25, 0.125] and image resolution is 256x256,
   # than the loss will be computer on resolutions 256x256, 128x128, 64x64, 32x32.
   scales: [1, 0.5, 0.25, 0.125]
+  # Dataset preprocessing cpu workers
+  dataloader_workers: 12
+  # Save checkpoint this frequently. If checkpoint_freq=50, checkpoint will be saved every 50 epochs.
+  checkpoint_freq: 50
   # Parameters of dropout
   # The first dropout_epoch training uses dropout operation 
   dropout_epoch: 35
@@ -112,6 +116,8 @@ train_avd_params:
   num_repeats: 150
   # Batch size.
   batch_size: 256
+  # Save checkpoint this frequently. If checkpoint_freq=50, checkpoint will be saved every 50 epochs.
+  checkpoint_freq: 10
   # Dataset preprocessing cpu workers
   dataloader_workers: 24
   # Drop learning rate 10 times after this epochs

@@ -39,7 +39,8 @@ def train(config, inpainting_network, kp_detector, bg_predictor, dense_motion_ne
 
     if 'num_repeats' in train_params or train_params['num_repeats'] != 1:
         dataset = DatasetRepeater(dataset, train_params['num_repeats'])
-    dataloader = DataLoader(dataset, batch_size=train_params['batch_size'], shuffle=True, num_workers=24, drop_last=True)
+    dataloader = DataLoader(dataset, batch_size=train_params['batch_size'], shuffle=True, 
+                            num_workers=train_params['dataloader_workers'], drop_last=True)
 
     generator_full = GeneratorFullModel(kp_detector, bg_predictor, dense_motion_network, inpainting_network, train_params)
 
@@ -48,7 +49,8 @@ def train(config, inpainting_network, kp_detector, bg_predictor, dense_motion_ne
         
     bg_start = train_params['bg_start']
     
-    with Logger(log_dir=log_dir, visualizer_params=config['visualizer_params']) as logger:
+    with Logger(log_dir=log_dir, visualizer_params=config['visualizer_params'], 
+                checkpoint_freq=train_params['checkpoint_freq']) as logger:
         for epoch in trange(start_epoch, train_params['num_epochs']):
             for x in dataloader:
                 if(torch.cuda.is_available()):

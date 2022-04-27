@@ -2,6 +2,11 @@
 
 Source code of the CVPR'2022 paper "[Thin-Plate Spline Motion Model for Image Animation](https://arxiv.org/abs/2203.14367)".
 
+![vox](assets/vox.gif)
+![ted](assets/ted.gif)
+
+**PS**: The paper trains the model for 100 epochs for a fair comparison. You can use more data and train for more epochs to get better performance.
+
 ### Installation
 
 We support ```python3```.(Recommended version is Python 3.9).
@@ -12,7 +17,7 @@ pip install -r requirements.txt
 
 
 ### YAML configs
-
+ 
 There are several configuration files one for each `dataset` in the `config` folder named as ```config/dataset_name.yaml```. See ```config/dataset.yaml``` to get the description of each parameter.
 
 See description of the parameters in the ```config/taichi-256.yaml```.
@@ -51,7 +56,7 @@ CUDA_VISIBLE_DEVICES=0 python run.py --mode reconstruction --config config/datas
 ```
 The `reconstruction` subfolder will be created in `{checkpoint_folder}`.
 The generated video will be stored to this folder, also generated videos will be stored in ```png``` subfolder in loss-less '.png' format for evaluation.
-To compute metrics, follow instructions from https://github.com/AliaksandrSiarohin/pose-evaluation.
+To compute metrics, follow instructions from [pose-evaluation](https://github.com/AliaksandrSiarohin/pose-evaluation).
 
 
 

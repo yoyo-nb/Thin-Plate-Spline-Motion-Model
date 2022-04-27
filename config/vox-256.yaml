@@ -29,8 +29,8 @@ model_params:
     num_blocks: 5
     scale_factor: 0.25
   avd_network_params:
-    id_bottle_size: 64
-    pose_bottle_size: 64
+    id_bottle_size: 128
+    pose_bottle_size: 128
 
 
 train_params:
@@ -40,6 +40,8 @@ train_params:
   lr_generator: 2.0e-4
   batch_size: 28
   scales: [1, 0.5, 0.25, 0.125]
+  dataloader_workers: 12
+  checkpoint_freq: 50
   dropout_epoch: 35
   dropout_maxp: 0.3
   dropout_startp: 0.1
@@ -56,11 +58,12 @@ train_params:
     bg: 10
 
 train_avd_params:
-  num_epochs: 100
-  num_repeats: 75
+  num_epochs: 200
+  num_repeats: 300
   batch_size: 256
   dataloader_workers: 24
-  epoch_milestones: [70, 90]
+  checkpoint_freq: 50
+  epoch_milestones: [140, 180]
   lr: 1.0e-3
   lambda_shift: 1
   random_scale: 0.25

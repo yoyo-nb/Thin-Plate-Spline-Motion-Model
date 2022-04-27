@@ -36,7 +36,8 @@ def train_avd(config, inpainting_network, kp_detector, bg_predictor, dense_motio
     dataloader = DataLoader(dataset, batch_size=train_params['batch_size'], shuffle=True,
                             num_workers=train_params['dataloader_workers'], drop_last=True)
 
-    with Logger(log_dir=log_dir, visualizer_params=config['visualizer_params']) as logger:
+    with Logger(log_dir=log_dir, visualizer_params=config['visualizer_params'], 
+                checkpoint_freq=train_params['checkpoint_freq']) as logger:
         for epoch in trange(start_epoch, train_params['num_epochs']):
             avd_network.train()
             for x in dataloader:

@@ -11,7 +11,7 @@ import collections
 
 
 class Logger:
-    def __init__(self, log_dir, visualizer_params=None, zfill_num=8, log_file_name='log.txt'):
+    def __init__(self, log_dir, checkpoint_freq=50, visualizer_params=None, zfill_num=8, log_file_name='log.txt'):
 
         self.loss_list = []
         self.cpk_dir = log_dir
@@ -21,6 +21,7 @@ class Logger:
         self.log_file = open(os.path.join(log_dir, log_file_name), 'a')
         self.zfill_num = zfill_num
         self.visualizer = Visualizer(**visualizer_params)
+        self.checkpoint_freq = checkpoint_freq
         self.epoch = 0
         self.best_loss = float('inf')
         self.names = None
@@ -82,14 +83,14 @@ class Logger:
 
     def log_iter(self, losses):
         losses = collections.OrderedDict(losses.items())
-        if self.names is None:
-            self.names = list(losses.keys())
+        self.names = list(losses.keys())
         self.loss_list.append(list(losses.values()))
 
     def log_epoch(self, epoch, models, inp, out):
         self.epoch = epoch
         self.models = models
-        self.save_cpk()
+        if (self.epoch + 1) % self.checkpoint_freq == 0:
+            self.save_cpk()
         self.log_scores(self.names)
         self.visualize_rec(inp, out)
 

@@ -53,7 +53,8 @@ def load_checkpoints(config_path, checkpoint_path, device):
     inpainting.load_state_dict(checkpoint['inpainting_network'])
     kp_detector.load_state_dict(checkpoint['kp_detector'])
     dense_motion_network.load_state_dict(checkpoint['dense_motion_network'])
-    avd_network.load_state_dict(checkpoint['avd_network'])
+    if 'avd_network' in checkpoint:
+        avd_network.load_state_dict(checkpoint['avd_network'])
     
     inpainting.eval()
     kp_detector.eval()
@@ -93,6 +94,32 @@ def make_animation(source_image, driving_video, inpainting_network, kp_detector,
     return predictions
 
 
+def find_best_frame(source, driving, cpu):
+    import face_alignment
+
+    def normalize_kp(kp):
+        kp = kp - kp.mean(axis=0, keepdims=True)
+        area = ConvexHull(kp[:, :2]).volume
+        area = np.sqrt(area)
+        kp[:, :2] = kp[:, :2] / area
+        return kp
+
+    fa = face_alignment.FaceAlignment(face_alignment.LandmarksType._2D, flip_input=True,
+                                      device= 'cpu' if cpu else 'cuda')
+    kp_source = fa.get_landmarks(255 * source)[0]
+    kp_source = normalize_kp(kp_source)
+    norm  = float('inf')
+    frame_num = 0
+    for i, image in tqdm(enumerate(driving)):
+        kp_driving = fa.get_landmarks(255 * image)[0]
+        kp_driving = normalize_kp(kp_driving)
+        new_norm = (np.abs(kp_source - kp_driving) ** 2).sum()
+        if new_norm < norm:
+            norm = new_norm
+            frame_num = i
+    return frame_num
+
+
 if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument("--config", required=True, help="path to config")
@@ -105,7 +132,10 @@ if __name__ == "__main__":
     parser.add_argument("--img_shape", default="256,256", type=lambda x: list(map(int, x.split(','))),
                         help='Shape of image, that the model was trained on.')
     
-    parser.add_argument("--mode", default='relative', choices=['standard', 'relative', 'avd'], help="Animate mode: ['standard', 'relative', 'avd']")
+    parser.add_argument("--mode", default='relative', choices=['standard', 'relative', 'avd'], help="Animate mode: ['standard', 'relative', 'avd'], when use the relative mode to animate a face, use '--find_best_frame' can get better quality result")
+    
+    parser.add_argument("--find_best_frame", dest="find_best_frame", action="store_true", 
+                        help="Generate from the frame that is the most alligned with source. (Only for faces, requires face_aligment lib)")
 
     parser.add_argument("--cpu", dest="cpu", action="store_true", help="cpu mode.")
 
@@ -131,7 +161,16 @@ if __name__ == "__main__":
     driving_video = [resize(frame, opt.img_shape)[..., :3] for frame in driving_video]
     inpainting, kp_detector, dense_motion_network, avd_network = load_checkpoints(config_path = opt.config, checkpoint_path = opt.checkpoint, device = device)
  
-    predictions = make_animation(source_image, driving_video, inpainting, kp_detector, dense_motion_network, avd_network, device = device, mode = opt.mode)
+    if opt.find_best_frame:
+        i = find_best_frame(source_image, driving_video, opt.cpu)
+        print ("Best frame: " + str(i))
+        driving_forward = driving_video[i:]
+        driving_backward = driving_video[:(i+1)][::-1]
+        predictions_forward = make_animation(source_image, driving_forward, inpainting, kp_detector, dense_motion_network, avd_network, device = device, mode = opt.mode)
+        predictions_backward = make_animation(source_image, driving_backward, inpainting, kp_detector, dense_motion_network, avd_network, device = device, mode = opt.mode)
+        predictions = predictions_backward[::-1] + predictions_forward[1:]
+    else:
+        predictions = make_animation(source_image, driving_video, inpainting, kp_detector, dense_motion_network, avd_network, device = device, mode = opt.mode)
     
     imageio.mimsave(opt.result_video, [img_as_ubyte(frame) for frame in predictions], fps=fps)
 
