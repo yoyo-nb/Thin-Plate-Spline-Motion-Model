@@ -70,13 +70,15 @@ class Logger:
         if optimizer_avd is not None:
             if 'optimizer_avd' in checkpoint:
                 optimizer_avd.load_state_dict(checkpoint['optimizer_avd'])
-        
-        return checkpoint['epoch']
+        epoch = -1
+        if 'epoch' in checkpoint:
+            epoch = checkpoint['epoch']
+        return epoch
 
     def __enter__(self):
         return self
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(self):
         if 'models' in self.__dict__:
             self.save_cpk()
         self.log_file.close()

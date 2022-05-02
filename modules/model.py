@@ -1,11 +1,9 @@
 from torch import nn
 import torch
 import torch.nn.functional as F
-from modules.util import AntiAliasInterpolation2d, make_coordinate_grid, TPS
+from modules.util import AntiAliasInterpolation2d, TPS
 from torchvision import models
 import numpy as np
-from torch.autograd import grad
-from modules.dense_motion import DenseMotionNetwork
 
 
 class Vgg19(torch.nn.Module):

@@ -1,6 +1,8 @@
 # [CVPR2022] Thin-Plate Spline Motion Model for Image Animation
 
-Source code of the CVPR'2022 paper "[Thin-Plate Spline Motion Model for Image Animation](https://arxiv.org/abs/2203.14367)".
+Source code of the CVPR'2022 paper "[Thin-Plate Spline Motion Model for Image Animation](https://arxiv.org/abs/2203.14367)". 
+
+### Example animation
 
 ![vox](assets/vox.gif)
 ![ted](assets/ted.gif)
@@ -61,12 +63,11 @@ To compute metrics, follow instructions from [pose-evaluation](https://github.co
 
 
 ### Pre-trained models
-Coming Soon Coming Soon Coming Soon Coming Soon Coming Soon!!!!
-I promise!.
+- [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/d/30ab8765da364fefa101/)
+- [Google Drive](https://drive.google.com/drive/folders/1pNDo1ODQIb5HVObRtCmubqJikmR7VVLT?usp=sharing)
 
 ### Image animation demo
-(when the pre-trained models released)
-
+- Google Colab: [here](https://colab.research.google.com/drive/1DREfdpnaBhqISg0fuQlAAIwyGVn1loH_?usp=sharing)
 - notebook: `demo.ipynb`, edit the config cell and run for image animation.
 - python:
 ```bash

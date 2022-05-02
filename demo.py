@@ -125,8 +125,8 @@ if __name__ == "__main__":
     parser.add_argument("--config", required=True, help="path to config")
     parser.add_argument("--checkpoint", default='checkpoints/vox.pth.tar', help="path to checkpoint to restore")
 
-    parser.add_argument("--source_image", default='./source.png', help="path to source image")
-    parser.add_argument("--driving_video", default='./driving.mp4', help="path to driving video")
+    parser.add_argument("--source_image", default='./assets/source.png', help="path to source image")
+    parser.add_argument("--driving_video", default='./assets/driving.mp4', help="path to driving video")
     parser.add_argument("--result_video", default='./result.mp4', help="path to output")
     
     parser.add_argument("--img_shape", default="256,256", type=lambda x: list(map(int, x.split(','))),

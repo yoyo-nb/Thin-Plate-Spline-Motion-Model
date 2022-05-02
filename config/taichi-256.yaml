@@ -110,7 +110,7 @@ train_params:
 # Parameters of training (animation-via-disentanglement)
 train_avd_params:
   # Number of training epochs, visualization is produced after each epoch.
-  num_epochs: 60
+  num_epochs: 100
   # For better i/o performance when number of videos is small number of epochs can be multiplied by this number.
   # Thus effectively with num_repeats=100 each epoch is 100 times larger.
   num_repeats: 150
@@ -121,7 +121,7 @@ train_avd_params:
   # Dataset preprocessing cpu workers
   dataloader_workers: 24
   # Drop learning rate 10 times after this epochs
-  epoch_milestones: [40, 50]
+  epoch_milestones: [70, 90]
   # Initial learning rate
   lr: 1.0e-3
   # Weights for equivariance loss.
