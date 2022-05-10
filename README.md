@@ -9,6 +9,10 @@ Source code of the CVPR'2022 paper "[Thin-Plate Spline Motion Model for Image An
 
 **PS**: The paper trains the model for 100 epochs for a fair comparison. You can use more data and train for more epochs to get better performance.
 
+|    🧾 Official Paper    |   📑 Datasets   | 🔑 Pre-trained Models |💡 Colab link|
+|------------|-------------|-----------|--------|
+| [Paper](https://arxiv.org/abs/2203.14367) | [Monkey-Net](https://github.com/AliaksandrSiarohin/monkey-net), [TaiChiHD and VoxCeleb](https://github.com/AliaksandrSiarohin/video-preprocessing), [TED-talks](https://github.com/snap-research/articulated-animation) | [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/d/30ab8765da364fefa101/), [Google Drive](https://drive.google.com/drive/folders/1pNDo1ODQIb5HVObRtCmubqJikmR7VVLT?usp=sharing)|[Notebook](https://colab.research.google.com/drive/1JOxpeVj-7LE48mMEF59uhjcbBQzmW2lj?usp=sharing)|
+
 ### Installation
 
 We support ```python3```.(Recommended version is Python 3.9).
