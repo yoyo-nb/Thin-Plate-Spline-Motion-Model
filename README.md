@@ -9,6 +9,10 @@ Source code of the CVPR'2022 paper "[Thin-Plate Spline Motion Model for Image An
 
 **PS**: The paper trains the model for 100 epochs for a fair comparison. You can use more data and train for more epochs to get better performance.
 
+
+### Web demo for animation
+Try the web demo for animation here [![Replicate](https://replicate.com/yoyo-nb/thin-plate-spline-motion-model/badge)](https://replicate.com/yoyo-nb/thin-plate-spline-motion-model)
+
 ### Installation
 
 We support ```python3```.(Recommended version is Python 3.9).
