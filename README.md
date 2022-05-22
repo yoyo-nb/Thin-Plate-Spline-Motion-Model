@@ -1,6 +1,12 @@
 # [CVPR2022] Thin-Plate Spline Motion Model for Image Animation
 
-Source code of the CVPR'2022 paper "[Thin-Plate Spline Motion Model for Image Animation](https://arxiv.org/abs/2203.14367)". 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![stars](https://img.shields.io/github/stars/yoyo-nb/Thin-Plate-Spline-Motion-Model.svg?style=flat)
+![GitHub repo size](https://img.shields.io/github/repo-size/yoyo-nb/Thin-Plate-Spline-Motion-Model.svg)
+
+Source code of the CVPR'2022 paper "Thin-Plate Spline Motion Model for Image Animation"
+
+[**Paper**](https://arxiv.org/abs/2203.14367) **|** [**Supp**](https://cloud.tsinghua.edu.cn/f/f7b8573bb5b04583949f/?dl=1)
 
 ### Example animation
 
@@ -11,7 +17,12 @@ Source code of the CVPR'2022 paper "[Thin-Plate Spline Motion Model for Image An
 
 
 ### Web demo for animation
-Try the web demo for animation here [![Replicate](https://replicate.com/yoyo-nb/thin-plate-spline-motion-model/badge)](https://replicate.com/yoyo-nb/thin-plate-spline-motion-model)
+- Try the web demo for animation here: [![Replicate](https://replicate.com/yoyo-nb/thin-plate-spline-motion-model/badge)](https://replicate.com/yoyo-nb/thin-plate-spline-motion-model)
+- Google Colab: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1DREfdpnaBhqISg0fuQlAAIwyGVn1loH_?usp=sharing)
+
+### Pre-trained models
+- [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/d/30ab8765da364fefa101/)
+- [Google Drive](https://drive.google.com/drive/folders/1pNDo1ODQIb5HVObRtCmubqJikmR7VVLT?usp=sharing)
 
 ### Installation
 
@@ -24,7 +35,7 @@ pip install -r requirements.txt
 
 ### YAML configs
  
-There are several configuration files one for each `dataset` in the `config` folder named as ```config/dataset_name.yaml```. See ```config/dataset.yaml``` to get the description of each parameter.
+There are several configuration files one for each `dataset` in the `config` folder named as ```config/dataset_name.yaml```. 
 
 See description of the parameters in the ```config/taichi-256.yaml```.
 
@@ -65,13 +76,7 @@ The generated video will be stored to this folder, also generated videos will be
 To compute metrics, follow instructions from [pose-evaluation](https://github.com/AliaksandrSiarohin/pose-evaluation).
 
 
-
-### Pre-trained models
-- [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/d/30ab8765da364fefa101/)
-- [Google Drive](https://drive.google.com/drive/folders/1pNDo1ODQIb5HVObRtCmubqJikmR7VVLT?usp=sharing)
-
 ### Image animation demo
-- Google Colab: [here](https://colab.research.google.com/drive/1DREfdpnaBhqISg0fuQlAAIwyGVn1loH_?usp=sharing)
 - notebook: `demo.ipynb`, edit the config cell and run for image animation.
 - python:
 ```bash
@@ -82,3 +87,5 @@ CUDA_VISIBLE_DEVICES=0 python demo.py --config config/vox-256.yaml --checkpoint 
 The main code is based upon [FOMM](https://github.com/AliaksandrSiarohin/first-order-model) and [MRAA](https://github.com/snap-research/articulated-animation)
 
 Thanks for the excellent works!
+
+Thanks [iperov](https://github.com/iperov), this work has been integrated in [DeepFaceLive](https://github.com/iperov/DeepFaceLive/)
