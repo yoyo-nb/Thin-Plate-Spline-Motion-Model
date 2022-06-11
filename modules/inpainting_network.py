@@ -17,24 +17,21 @@ class InpaintingNetwork(nn.Module):
         self.first = SameBlock2d(num_channels, block_expansion, kernel_size=(7, 7), padding=(3, 3))
 
         down_blocks = []
+        up_blocks = []
+        resblock = []
         for i in range(num_down_blocks):
             in_features = min(max_features, block_expansion * (2 ** i))
             out_features = min(max_features, block_expansion * (2 ** (i + 1)))
             down_blocks.append(DownBlock2d(in_features, out_features, kernel_size=(3, 3), padding=(1, 1)))
+            decoder_in_feature = out_features * 2
+            if i==num_down_blocks-1:
+                decoder_in_feature = out_features
+            up_blocks.append(UpBlock2d(decoder_in_feature, in_features, kernel_size=(3, 3), padding=(1, 1)))
+            resblock.append(ResBlock2d(decoder_in_feature, kernel_size=(3, 3), padding=(1, 1)))
+            resblock.append(ResBlock2d(decoder_in_feature, kernel_size=(3, 3), padding=(1, 1)))
         self.down_blocks = nn.ModuleList(down_blocks)
-
-        up_blocks = []
-        in_features = [max_features, max_features, max_features//2]
-        out_features = [max_features//2, max_features//4, max_features//8]
-        for i in range(num_down_blocks):
-            up_blocks.append(UpBlock2d(in_features[i], out_features[i], kernel_size=(3, 3), padding=(1, 1)))
-        self.up_blocks = nn.ModuleList(up_blocks)
-
-        resblock = []
-        for i in range(num_down_blocks):
-            resblock.append(ResBlock2d(in_features[i], kernel_size=(3, 3), padding=(1, 1)))
-            resblock.append(ResBlock2d(in_features[i], kernel_size=(3, 3), padding=(1, 1)))
-        self.resblock = nn.ModuleList(resblock)
+        self.up_blocks = nn.ModuleList(up_blocks[::-1])
+        self.resblock = nn.ModuleList(resblock[::-1])
 
         self.final = nn.Conv2d(block_expansion, num_channels, kernel_size=(7, 7), padding=(3, 3))
         self.num_channels = num_channels

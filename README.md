@@ -89,3 +89,5 @@ The main code is based upon [FOMM](https://github.com/AliaksandrSiarohin/first-o
 Thanks for the excellent works!
 
 Thanks [iperov](https://github.com/iperov), this work has been integrated in [DeepFaceLive](https://github.com/iperov/DeepFaceLive/)
+
+Thanks [TalkUHulk](https://github.com/TalkUHulk), the C++/Python demo is provided in [Image-Animation-Turbo-Boost](https://github.com/TalkUHulk/Image-Animation-Turbo-Boost)
