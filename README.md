@@ -89,6 +89,12 @@ The main code is based upon [FOMM](https://github.com/AliaksandrSiarohin/first-o
 
 Thanks for the excellent works!
 
-Thanks [iperov](https://github.com/iperov), this work has been integrated in [DeepFaceLive](https://github.com/iperov/DeepFaceLive/)
+And Thanks to:
 
-Thanks [TalkUHulk](https://github.com/TalkUHulk), the C++/Python demo is provided in [Image-Animation-Turbo-Boost](https://github.com/TalkUHulk/Image-Animation-Turbo-Boost)
+- [@chenxwh](https://github.com/chenxwh): Add Web Demo & Docker environment [![Replicate](https://replicate.com/yoyo-nb/thin-plate-spline-motion-model/badge)](https://replicate.com/yoyo-nb/thin-plate-spline-motion-model) 
+
+- [@iperov](https://github.com/iperov): TPSMM has been integrated in [DeepFaceLive](https://github.com/iperov/DeepFaceLive/)
+
+- [@TalkUHulk](https://github.com/TalkUHulk): The C++/Python demo is provided in [Image-Animation-Turbo-Boost](https://github.com/TalkUHulk/Image-Animation-Turbo-Boost)
+
+- [@AK391](https://github.com/AK391): Add huggingface web demo [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/CVPR/Image-Animation-using-Thin-Plate-Spline-Motion-Model)
