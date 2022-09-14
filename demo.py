@@ -34,7 +34,7 @@ def relative_kp(kp_source, kp_driving, kp_driving_initial):
 
 def load_checkpoints(config_path, checkpoint_path, device):
     with open(config_path) as f:
-        config = yaml.load(f)
+        config = yaml.full_load(f)
 
     inpainting = InpaintingNetwork(**config['model_params']['generator_params'],
                                         **config['model_params']['common_params'])
