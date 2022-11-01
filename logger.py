@@ -78,7 +78,7 @@ class Logger:
     def __enter__(self):
         return self
 
-    def __exit__(self):
+    def __exit__(self, exc_type, exc_value, tb):
         if 'models' in self.__dict__:
             self.save_cpk()
         self.log_file.close()
