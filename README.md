@@ -22,8 +22,10 @@ Source code of the CVPR'2022 paper "Thin-Plate Spline Motion Model for Image Ani
 - Google Colab: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1DREfdpnaBhqISg0fuQlAAIwyGVn1loH_?usp=sharing)
 
 ### Pre-trained models
-- [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/d/30ab8765da364fefa101/)
+- ~~[Tsinghua Cloud](https://cloud.tsinghua.edu.cn/d/30ab8765da364fefa101/)~~
+- [Yandex](https://disk.yandex.com/d/bWopgbGj1ZUV1w)
 - [Google Drive](https://drive.google.com/drive/folders/1pNDo1ODQIb5HVObRtCmubqJikmR7VVLT?usp=sharing)
+- [Baidu Yun](https://pan.baidu.com/s/1hnXmDpIbRC6WqE3tF9c5QA?pwd=1234)
 
 ### Installation
 
@@ -47,6 +49,13 @@ See description of the parameters in the ```config/taichi-256.yaml```.
 2) **TaiChiHD** and **VoxCeleb**. Follow instructions from [video-preprocessing](https://github.com/AliaksandrSiarohin/video-preprocessing). 
 
 3) **TED-talks**. Follow instructions from [MRAA](https://github.com/snap-research/articulated-animation).
+
+Here are **VoxCeleb**, **TaiChiHD** and **TED-talks**  pre-processed datasets used in the paper. [Baidu Yun](https://pan.baidu.com/s/1HKJOtXBIiP_tlLiFbzn3oA?pwd=x7xv)
+Download all files under the folder, then merge the files and decompress, for example:
+```bash
+cat vox.tar.* > vox.tar
+tar xvf vox.tar
+```
 
 
 ### Training
