@@ -18,6 +18,7 @@ from demo import load_checkpoints
 from demo import make_animation
 from ffhq_dataset.face_alignment import image_align
 from ffhq_dataset.landmarks_detector import LandmarksDetector
+from ffhq_dataset.landmarks_detector
 
 
 warnings.filterwarnings("ignore")
