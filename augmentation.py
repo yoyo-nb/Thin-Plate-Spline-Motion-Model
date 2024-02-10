@@ -19,6 +19,7 @@ from skimage import img_as_ubyte, img_as_float
 def crop_clip(clip, min_h, min_w, h, w):
     if isinstance(clip[0], np.ndarray):
         cropped = [img[min_h:min_h + h, min_w:min_w + w, :] for img in clip]
+        cropped = [img[min_h:min_h + h, min_w:min_w + w, :]
 
     elif isinstance(clip[0], PIL.Image.Image):
         cropped = [
