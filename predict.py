@@ -39,6 +39,7 @@ class Predictor(BasePredictor):
             self.avd_network,
         ) = ({}, {}, {}, {})
         for d in datasets:
+    ^    for d in datasets_inbound
             (
                 self.inpainting[d],
                 self.kp_detector[d],
