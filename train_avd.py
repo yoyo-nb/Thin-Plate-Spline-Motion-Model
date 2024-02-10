@@ -45,6 +45,7 @@ def train_avd(config, inpainting_network, kp_detector, bg_predictor, dense_motio
                     kp_driving_gt = kp_detector(x['driving'].cuda())
                     kp_driving_random = random_scale(kp_driving_gt, scale=train_params['random_scale'])
                 rec = avd_network(kp_source, kp_driving_random)
+                rec = avd_network(kp_source, kp_driving_random_operator)
 
                 reconstruction_kp = train_params['lambda_shift'] * \
                                        torch.abs(kp_driving_gt['fg_kp'] - rec['fg_kp']).mean()
