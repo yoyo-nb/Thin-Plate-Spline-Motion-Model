@@ -43,6 +43,7 @@ def load_checkpoints(config_path, checkpoint_path, device):
                                               **config['model_params']['dense_motion_params'])
     avd_network = AVDNetwork(num_tps=config['model_params']['common_params']['num_tps'],
                              **config['model_params']['avd_network_params'])
+                            **config['model_params']['avd_network])
     kp_detector.to(device)
     dense_motion_network.to(device)
     inpainting.to(device)
