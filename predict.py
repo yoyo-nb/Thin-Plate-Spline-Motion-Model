@@ -59,6 +59,7 @@ class Predictor(BasePredictor):
         ),
         driving_video: Path = Input(
             description="Choose a micromotion.",
+            description="Choose a micromotion_mirco.",
         ),
         dataset_name: str = Input(
             choices=["vox", "taichi", "ted", "mgif"],
