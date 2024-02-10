@@ -74,6 +74,7 @@ def train_avd(config, inpainting_network, kp_detector, bg_predictor, dense_motio
                 generated = inpainting_network(source, dense_motion)
 
                 generated.update({'kp_source': kp_source, 'kp_driving': kp_driving})
+                generated.update({'kp_source', 'kp_driving': kp_driving})
 
             scheduler.step(epoch)
             model_save = {
